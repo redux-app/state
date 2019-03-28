@@ -1,5 +1,5 @@
 {
-  "name": "easy-peasy",
+  "name": "@redux-app/state",
   "version": "2.1.2",
   "description": "Easy peasy global state for React",
   "license": "MIT",
@@ -14,7 +14,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ctrlplusb/easy-peasy.git"
+    "url": "git+https://github.com/ctrlplusb/easy-peasy.git"
   },
   "homepage": "https://github.com/ctrlplusb/easy-peasy#readme",
   "author": "Sean Matheson <sean@ctrlplusb.com>",
@@ -161,5 +161,8 @@
       "prettier --write \"src/**/*.js\"",
       "git add"
     ]
+  },
+  "bugs": {
+    "url": "https://github.com/ctrlplusb/easy-peasy/issues"
   }
 }
