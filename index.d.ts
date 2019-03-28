@@ -1,4 +1,11 @@
-import { Component, Context } from 'react';
+import {
+  Component,
+  Context,
+  ProviderExoticComponent,
+  ProviderProps,
+  ExoticComponent,
+  ConsumerProps
+} from 'react';
 import {
   KeysOfType,
   Omit,
@@ -585,3 +592,9 @@ export function createTypedHooks<StoreModel extends Object = {}>(): {
 export class StoreProvider<StoreModel = any> extends Component<{
   store: Store<StoreModel>;
 }> {}
+
+export class StoreContext<T> implements Context<T> {
+  Provider: ProviderExoticComponent<ProviderProps<T>>;
+  Consumer: ExoticComponent<ConsumerProps<T>>;
+  displayName?: string | undefined;
+}
