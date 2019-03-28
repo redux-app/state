@@ -1,22 +1,14 @@
-<p>&nbsp;</p>
-<p align='center'>
-  <img src="https://i.imgur.com/KHTgPvA.png" width="320" />
-</p>
-<p align='center'>Easy peasy global state for React</p>
-<p>&nbsp;</p>
-
-[![npm](https://img.shields.io/npm/v/easy-peasy.svg?style=flat-square)](http://npm.im/easy-peasy)
-[![MIT License](https://img.shields.io/npm/l/easy-peasy.svg?style=flat-square)](http://opensource.org/licenses/MIT)
-[![Travis](https://img.shields.io/travis/ctrlplusb/easy-peasy.svg?style=flat-square)](https://travis-ci.org/ctrlplusb/easy-peasy)
-[![Codecov](https://img.shields.io/codecov/c/github/ctrlplusb/easy-peasy.svg?style=flat-square)](https://codecov.io/github/ctrlplusb/easy-peasy)
+[![npm](https://img.shields.io/npm/v/@redux-app/state.svg?style=flat-square)](http://npm.im/@redux-app/state)
+[![MIT License](https://img.shields.io/npm/l/@redux-app/state.svg?style=flat-square)](http://opensource.org/licenses/MIT)
+[![Travis](https://img.shields.io/travis/redux-app/state.svg?style=flat-square)](https://travis-ci.org/redux-app/state)
 
 ```javascript
-import { action, createStore, StoreProvider, useStore, useActions } from 'easy-peasy';
+import { action, createStore, StoreProvider, useStore, useActions } from '@redux-app/state';
 
 // 👇 create your store, providing the model
 const store = createStore({
   todos: {
-    items: ['Install easy-peasy', 'Build app', 'Profit'],
+    items: ['Install @redux-app/state', 'Build app', 'Profit'],
     // 👇 define actions directly on your model
     add: action((state, payload) => {
       // simply mutate state to update, and we convert to immutable updates
@@ -65,19 +57,10 @@ function TodoList() {
     - Customise root reducer enhancer
     - Easy migration path for traditional styled Redux apps
 
-<p>&nbsp;</p>
-<p align='center'>
-  <img src='https://i.imgur.com/2vFSy1y.png' width='500' />
-</p>
-<p>&nbsp;</p>
-
 ## TOCs
 
   - [Introduction](#introduction)
   - [Installation](#installation)
-  - [Examples](#examples)
-    - [Easy Peasy Typescript](#easy-peasy-typescript)
-    - [React Todo List](#react-todo-list)
   - [Core Concepts](#core-concepts)
     - [Creating the store](#creating-the-store)
     - [Accessing state directly via the store](#accessing-state-directly-via-the-store)
@@ -139,28 +122,10 @@ npm install react-dom
 Then install Easy Peasy.
 
 ```bash
-npm install easy-peasy
+npm install @redux-app/state
 ```
 
 You're off to the races.
-
-<p>&nbsp;</p>
-
----
-
-## Examples
-
-### Easy Peasy Typescript
-
-This GitHub repository shows off how to utilise Typescript with Easy Peasy. I highly recommend cloning it and running it so that you can experience first hand what a joy it is to have types helping you with global state.
-
-https://github.com/ctrlplusb/easy-peasy-typescript
-
-### React Todo List
-
-A simple implementation of a todo list that utilises a mock service to illustrate data fetching/persisting via effect actions. A fully stateful app with no class components. Hot dang hooks are awesome.
-
-https://codesandbox.io/s/woyn8xqk15
 
 <p>&nbsp;</p>
 
@@ -185,7 +150,7 @@ const model = {
 Then you provide your model to `createStore`.
 
 ```javascript
-import { createStore } from 'easy-peasy';
+import { createStore } from '@redux-app/state';
 
 const store = createStore(model);
 ```
@@ -205,7 +170,7 @@ store.getState().todos.items;
 In order to mutate your state you need to define an action against your model.
 
 ```javascript
-import { action } from 'easy-peasy'; // 👈 import the helper
+import { action } from '@redux-app/state'; // 👈 import the helper
 
 const store = createStore({
   todos: {
@@ -237,7 +202,7 @@ The action will receive as its first parameter the slice of the state that it wa
 Easy Peasy will bind your actions against the store's `dispatch` using paths that match the location of the action on your model. This allows you to easily dispatch your actions, providing any payload that they may require.
 
 ```javascript
-store.dispatch.todos.addTodo('Install easy-peasy');
+store.dispatch.todos.addTodo('Install @redux-app/state');
 //            |-------------|
 //                  |-- path matches our model (todos.addTodo)
 ```
@@ -246,7 +211,7 @@ Check your state and you should see that it is updated.
 
 ```javascript
 store.getState().todos.items;
-// ['Install easy-peasy']
+// ['Install @redux-app/state']
 ```
 
 ### Creating a `thunk` action
@@ -254,7 +219,7 @@ store.getState().todos.items;
 If you wish to perform side effects, such as fetching or persisting data from your server then you can use the `thunk` helper to declare a thunk action.
 
 ```javascript
-import { thunk } from 'easy-peasy'; // 👈 import the helper
+import { thunk } from '@redux-app/state'; // 👈 import the helper
 
 const store = createStore({
   todos: {
@@ -287,7 +252,7 @@ As you can see in the example above you can't modify the state directly within a
 You can dispatch a thunk action in the same manner as a normal action. However, a `thunk` action always returns a `Promise` allowing you to chain in order to execute after the `thunk` has completed.
 
 ```javascript
-store.dispatch.todos.saveTodo('Install easy-peasy').then(() => {
+store.dispatch.todos.saveTodo('Install @redux-app/state').then(() => {
   console.log('Todo saved');
 })
 ```
@@ -297,7 +262,7 @@ store.dispatch.todos.saveTodo('Install easy-peasy').then(() => {
 If you have state that can be derived from state then you can use the [`select`](#selectselector) helper. Simply attach it to any part of your model.
 
 ```javascript
-import { select } from 'easy-peasy'; // 👈 import then helper
+import { select } from '@redux-app/state'; // 👈 import then helper
 
 const store = createStore({
   shoppingBasket: {
@@ -346,7 +311,7 @@ If you aren't familiar with hooks yet we highly recommend that you read the [off
 Firstly we will need to create your store and wrap your application with the `StoreProvider`.
 
 ```javascript
-import { StoreProvider, createStore } from 'easy-peasy';
+import { StoreProvider, createStore } from '@redux-app/state';
 import model from './model'
 
 const store = createStore(model);
@@ -363,7 +328,7 @@ const App = () => (
 To access state within your components you can use the `useStore` hook.
 
 ```javascript
-import { useStore } from 'easy-peasy';
+import { useStore } from '@redux-app/state';
 
 const TodoList = () => {
   const todos = useStore(state => state.todos.items);
@@ -378,7 +343,7 @@ const TodoList = () => {
 In the case that your `useStore` implementation depends on an "external" value when mapping state. Then you should provide the respective "external" within the second argument to the `useStore`. The `useStore` hook will then track the external value and ensure to recalculate the mapped state if any of the external values change.
 
 ```javascript
-import { useStore } from 'easy-peasy';
+import { useStore } from '@redux-app/state';
 
 const Product = ({ id }) => {
   const product = useStore(
@@ -403,7 +368,7 @@ In order to fire actions in your components you can use the `useActions` hook.
 
 ```javascript
 import { useState } from 'react';
-import { useActions } from 'easy-peasy';
+import { useActions } from '@redux-app/state';
 
 const AddTodo = () => {
   const [text, setText] = useState('');
@@ -441,7 +406,7 @@ npm install react-redux
 ```javascript
 import React from 'react';
 import { render } from 'react-dom';
-import { createStore } from 'easy-peasy';
+import { createStore } from '@redux-app/state';
 import { Provider } from 'react-redux'; // 👈 import the provider
 import model from './model';
 import TodoList from './components/TodoList';
@@ -504,7 +469,7 @@ We announced our support for Typescript via [this Medium post](https://medium.co
 
 The documentation below will be expanded into higher detail soon, but the combination of the Medium post and the below examples should be enough to get you up and running for now. If anything is unclear please feel free to post and issue and we would be happy to help.
 
-We also have an [example repository](https://github.com/ctrlplusb/easy-peasy-typescript) which you can clone and run for a more interactive run through.
+We also have an [example repository](https://github.com/redux-app/state-typescript) which you can clone and run for a more interactive run through.
 
 <details>
 <summary>Firstly, you need to define a type that represents your model.</summary>
@@ -514,7 +479,7 @@ Easy Peasy exports numerous types to help you declare your model correctly.
 
 ```typescript
 
-import { Action, Reducer, Thunk, Select } from 'easy-peasy'
+import { Action, Reducer, Thunk, Select } from '@redux-app/state'
 
 interface TodosModel {
   items: Array<string>
@@ -611,7 +576,7 @@ store.dispatch.todos.addTodo('Install typescript')
 <p>
 
 ``` typescript
-import { useStore, useActions, Actions, State } from 'easy-peasy';
+import { useStore, useActions, Actions, State } from '@redux-app/state';
 import { StoreModel } from './your-store';
 
 function MyComponent() {
@@ -634,7 +599,7 @@ The above can become a bit cumbersome - having to constantly provide your types 
 ```typescript
 // hooks.js
 
-import { createTypedHooks } from "easy-peasy";
+import { createTypedHooks } from "@redux-app/state";
 import { StoreModel } from "./model";
 
 export default createTypedHooks<StoreModel>();
@@ -694,7 +659,7 @@ React Native, hybrid, desktop and server side Redux apps can use Redux Dev Tools
 To use this library, you will need to pass the DevTools compose helper as part of the [config object](#createstoremodel-config) to `createStore`
 
 ```javascript
-import { createStore } from 'easy-peasy';
+import { createStore } from '@redux-app/state';
 import { composeWithDevTools } from 'remote-redux-devtools';
 import model from './model';
 
@@ -736,7 +701,7 @@ Actions are relatively simple to test as they are essentially an immutable updat
 Given the following model under test:
 
 ```typescript
-import { action } from 'easy-peasy'
+import { action } from '@redux-app/state'
 
 const todosModel = {
   items: {},
@@ -800,7 +765,7 @@ const todosModel = {
 We could test it like so:
 
 ```typescript
-import { createStore, actionName, thunkStartName, thunkCompleteName, thunkFailName } from 'easy-peasy'
+import { createStore, actionName, thunkStartName, thunkCompleteName, thunkFailName } from '@redux-app/state'
 
 const createFetchMock = response =>
   jest.fn(() => Promise.resolve({ json: () => Promise.resolve(response) }))
@@ -858,7 +823,7 @@ As you can see it is making use of our hooks to gain access to state and actions
 We could adopt the following strategy to test it.
 
 ```typescript
-import { createStore, StoreProvider } from 'easy-peasy'
+import { createStore, StoreProvider } from '@redux-app/state'
 import model from './model';
 
 test('Counter', () => {
@@ -999,7 +964,7 @@ When you have created a store all the standard APIs of a [Redux Store](https://r
 <p>
 
 ```javascript
-import { createStore } from 'easy-peasy';
+import { createStore } from '@redux-app/state';
 
 const store = createStore({
   todos: {
@@ -1048,7 +1013,7 @@ When your model is processed by Easy Peasy to create your store all of your acti
 <p>
 
 ```javascript
-import { action, createStore } from 'easy-peasy';
+import { action, createStore } from '@redux-app/state';
 
 const store = createStore({
   todos: {
@@ -1059,7 +1024,7 @@ const store = createStore({
   }
 });
 
-store.dispatch.todos.add('Install easy-peasy');
+store.dispatch.todos.add('Install @redux-app/state');
 ```
 </p>
 </details>
@@ -1144,7 +1109,7 @@ When your model is processed by Easy Peasy to create your store all of your thun
 <p>
 
 ```javascript
-import { action, createStore, thunk } from 'easy-peasy'; // 👈 import then helper
+import { action, createStore, thunk } from '@redux-app/state'; // 👈 import then helper
 
 const store = createStore({
   session: {
@@ -1178,7 +1143,7 @@ store.dispatch.session.login({
 <p>
 
 ```javascript
-import { createStore, thunk } from 'easy-peasy';
+import { createStore, thunk } from '@redux-app/state';
 
 const store = createStore({
   counter: {
@@ -1206,7 +1171,7 @@ store.dispatch.doSomething()
 <p>
 
 ```javascript
-import { createStore, thunk } from 'easy-peasy';
+import { createStore, thunk } from '@redux-app/state';
 
 const store = createStore({
   counter: {
@@ -1233,7 +1198,7 @@ store.dispatch.doSomething()
 <p>
 
 ```javascript
-import { action, createStore, thunk } from 'easy-peasy';
+import { action, createStore, thunk } from '@redux-app/state';
 
 const store = createStore({
   audit: {
@@ -1265,7 +1230,7 @@ We don't recommned doing this, and instead encourage you to use the [`listen`](#
 <p>
 
 ```javascript
-import { createStore, thunk } from 'easy-peasy';
+import { createStore, thunk } from '@redux-app/state';
 import api from './api' // 👈 a dependency we want to inject
 
 const store = createStore(
@@ -1329,7 +1294,7 @@ Some 3rd party libraries, for example [`connected-react-router`](https://github.
 <p>
 
 ```javascript
-import { createStore, reducer } from 'easy-peasy';
+import { createStore, reducer } from '@redux-app/state';
 
 const store = createStore({
   counter: reducer((state = 1, action) => {
@@ -1383,7 +1348,7 @@ The results of your selectors will be cached, and will only be recomputed if the
 <p>
 
 ```javascript
-import { select } from 'easy-peasy'; // 👈 import then helper
+import { select } from '@redux-app/state'; // 👈 import then helper
 
 const store = createStore({
   shoppingBasket: {
@@ -1407,7 +1372,7 @@ store.getState().shoppingBasket.totalPrice;
 <p>
 
 ```javascript
-import { select } from 'easy-peasy'; // 👈 import then helper
+import { select } from '@redux-app/state'; // 👈 import then helper
 
 const store = createStore({
   products: [{ id: 1, name: 'Shoes', price: 123 }, { id: 2, name: 'Hat', price: 75 }],
@@ -1433,7 +1398,7 @@ store.getState().productById(1);
 <p>
 
 ```javascript
-import { select } from 'easy-peasy';
+import { select } from '@redux-app/state';
 
 const totalPriceSelector = select(state =>
   state.products.reduce((acc, cur) => acc + cur.price, 0),
@@ -1492,7 +1457,7 @@ Note: If any action being listened to does not complete successfully (i.e. throw
 <p>
 
 ```javascript
-import { action, listen } from 'easy-peasy'; // 👈 import the helper
+import { action, listen } from '@redux-app/state'; // 👈 import the helper
 
 const userModel = {
   user: null,
@@ -1536,7 +1501,7 @@ const model = {
 <p>
 
 ```javascript
-import { listen } from 'easy-peasy';
+import { listen } from '@redux-app/state';
 
 const model = {
   msg: '',
@@ -1567,7 +1532,7 @@ Initialises your React application with the store so that your components will b
 <p>
 
 ```javascript
-import { StoreProvider, createStore } from 'easy-peasy';
+import { StoreProvider, createStore } from '@redux-app/state';
 import model from './model'
 
 const store = createStore(model);
@@ -1612,7 +1577,7 @@ Your `mapState` can either resolve a single piece of state. If you wish to resol
 <p>
 
 ```javascript
-import { useStore } from 'easy-peasy';
+import { useStore } from '@redux-app/state';
 
 const TodoList = () => {
   const todos = useStore(state => state.todos.items);
@@ -1632,7 +1597,7 @@ const TodoList = () => {
 <p>
 
 ```javascript
-import { useStore } from 'easy-peasy';
+import { useStore } from '@redux-app/state';
 
 const BasketTotal = () => {
   const totalPrice = useStore(state => state.basket.totalPrice);
@@ -1654,7 +1619,7 @@ const BasketTotal = () => {
 <p>
 
 ```javascript
-import { useStore } from 'easy-peasy';
+import { useStore } from '@redux-app/state';
 
 const BasketTotal = () => {
   const { totalPrice, netPrice } = useStore(state => ({
@@ -1701,7 +1666,7 @@ const productNames = products.map(x => x.name)
 Alternatively you could use the [`select`](#selectselector) helper to define derived state against your model itself.
 
 ```javascript
-import { select, createStore } from 'easy-peasy';
+import { select, createStore } from '@redux-app/state';
 
 const createStore = ({
   products: [{ name: 'Boots' }],
@@ -1746,7 +1711,7 @@ A [hook](https://reactjs.org/docs/hooks-intro.html) granting your components acc
 
 ```javascript
 import { useState } from 'react';
-import { useActions } from 'easy-peasy';
+import { useActions } from '@redux-app/state';
 
 const AddTodo = () => {
   const [text, setText] = useState('');
@@ -1769,7 +1734,7 @@ const AddTodo = () => {
 
 ```javascript
 import { useState } from 'react';
-import { useActions } from 'easy-peasy';
+import { useActions } from '@redux-app/state';
 
 const EditTodo = ({ todo }) => {
   const [text, setText] = useState(todo.text);
@@ -1800,7 +1765,7 @@ A [hook](https://reactjs.org/docs/hooks-intro.html) granting your components acc
 
 ```javascript
 import { useState } from 'react';
-import { useDispatch } from 'easy-peasy';
+import { useDispatch } from '@redux-app/state';
 
 const AddTodo = () => {
   const [text, setText] = useState('');
@@ -1830,7 +1795,7 @@ Creates a type that represents the actions for a model.
 <p>
 
 ```typescript
-import { Actions } from 'easy-peasy';
+import { Actions } from '@redux-app/state';
 
 type ModelActions = Actions<MyStoreModel>;
 ```
@@ -1847,7 +1812,7 @@ Represents an `action`, useful when defining your model interface.
 <p>
 
 ```typescript
-import { Action, action } from 'easy-peasy';
+import { Action, action } from '@redux-app/state';
 
 interface Todos {
   items: string[];
@@ -1874,7 +1839,7 @@ Represents a `listen`, useful when defining your model interface.
 <p>
 
 ```typescript
-import { Listen, listen } from 'easy-peasy';
+import { Listen, listen } from '@redux-app/state';
 
 interface Audit {
   logs: string[];
@@ -1904,7 +1869,7 @@ Represents a `reducer`, useful when defining your model interface.
 <p>
 
 ```typescript
-import { Reducer, reducer } from 'easy-peasy';
+import { Reducer, reducer } from '@redux-app/state';
 import { RouterState, routerReducer } from 'my-router-solution';
 
 interface Model {
@@ -1928,7 +1893,7 @@ Represents a `select`, useful when defining your model interface.
 <p>
 
 ```typescript
-import { Select, select } from 'easy-peasy';
+import { Select, select } from '@redux-app/state';
 
 interface Todos {
   items: string[];
@@ -1955,7 +1920,7 @@ Represents a `thunk`, useful when defining your model interface.
 <p>
 
 ```typescript
-import { Thunk, thunk } from 'easy-peasy';
+import { Thunk, thunk } from '@redux-app/state';
 
 interface Todos {
   items: string[];
@@ -1988,7 +1953,7 @@ Allows you to create typed versions of all the hooks so that you don't need to c
 
 ```typescript
 // hooks.js
-import { createTypedHooks } from 'easy-peasy';
+import { createTypedHooks } from '@redux-app/state';
 import { StoreModel } from './model';
 
 const { useActions, useStore, useDispatch } = createTypedHooks<StoreModel>();

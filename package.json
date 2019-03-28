@@ -1,10 +1,10 @@
 {
   "name": "@redux-app/state",
   "version": "2.1.2",
-  "description": "Easy peasy global state for React",
+  "description": "Easy global state for React",
   "license": "MIT",
-  "main": "dist/easy-peasy.cjs.js",
-  "module": "dist/easy-peasy.esm.js",
+  "main": "dist/@redux-app/state.cjs.js",
+  "module": "dist/@redux-app/state.esm.js",
   "types": "./index.d.ts",
   "sideEffects": false,
   "files": [
@@ -14,10 +14,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ctrlplusb/easy-peasy.git"
+    "url": "git+https://github.com/redux-app/state.git"
   },
-  "homepage": "https://github.com/ctrlplusb/easy-peasy#readme",
-  "author": "Sean Matheson <sean@ctrlplusb.com>",
+  "homepage": "https://github.com/redux-app/state#readme",
   "keywords": [
     "react",
     "redux",
@@ -28,11 +27,8 @@
     "build": "rollup -c",
     "clean": "rimraf ./dist && rimraf ./coverage",
     "lint": "eslint src",
-    "precommit": "lint-staged && npm run test",
     "prepublish": "npm run build",
-    "test": "jest",
-    "test:coverage": "npm run test -- --coverage",
-    "test:coverage:deploy": "npm run test:coverage && codecov"
+    "test": "jest"
   },
   "resolutions": {
     "@types/react": "^16.8.8"
@@ -163,6 +159,6 @@
     ]
   },
   "bugs": {
-    "url": "https://github.com/ctrlplusb/easy-peasy/issues"
+    "url": "https://github.com/redux-app/state/issues"
   }
 }
