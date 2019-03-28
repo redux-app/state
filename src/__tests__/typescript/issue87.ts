@@ -1,4 +1,4 @@
-import { action, Action, createStore } from 'easy-peasy';
+import { action, Action, createStore } from '@redux-app/state';
 
 interface IAnimal {
   name?: string;

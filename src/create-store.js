@@ -169,5 +169,11 @@ export default function createStore(model, options = {}) {
     rebindStore();
   };
 
+  store.setContext = context => {
+    store.__context = context;
+  }
+
+  store.getContext = () => store.__context;
+
   return store;
 }

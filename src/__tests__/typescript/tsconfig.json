@@ -5,7 +5,7 @@
     "strict": true,
     "baseUrl": "../../..",
     "paths": {
-      "easy-peasy": ["index.d.ts"]
+      "@redux-app/state": ["index.d.ts"]
     }
   }
 }

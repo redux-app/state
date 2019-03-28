@@ -1,4 +1,4 @@
-import { Action, action } from 'easy-peasy';
+import { Action, action } from '@redux-app/state';
 
 interface Notification {
   id: string;
