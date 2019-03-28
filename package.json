@@ -1,6 +1,6 @@
 {
   "name": "@redux-app/state",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "Easy global state for React",
   "license": "MIT",
   "main": "dist/@redux-app/state.cjs.js",
