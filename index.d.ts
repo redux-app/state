@@ -1,9 +1,6 @@
 import {
   Component,
-  Context,
-  ProviderExoticComponent,
   ProviderProps,
-  ExoticComponent,
   ConsumerProps
 } from 'react';
 import {
@@ -190,8 +187,6 @@ export type Store<
     dispatch: Dispatch<StoreModel>;
     getMockedActions: () => ActionData[];
     clearMockedActions: () => void;
-    setContext: <T>(context: Context<T>) => void;
-    getContext: <T>() => Context<T>;
   }
 >;
 
@@ -592,9 +587,3 @@ export function createTypedHooks<StoreModel extends Object = {}>(): {
 export class StoreProvider<StoreModel = any> extends Component<{
   store: Store<StoreModel>;
 }> {}
-
-export class StoreContext<T> implements Context<T> {
-  Provider: ProviderExoticComponent<ProviderProps<T>>;
-  Consumer: ExoticComponent<ConsumerProps<T>>;
-  displayName?: string | undefined;
-}

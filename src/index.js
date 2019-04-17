@@ -2,7 +2,6 @@ import { setAutoFreeze } from 'immer';
 import { createTypedHooks, useStore, useActions, useDispatch } from './hooks';
 import createStore from './create-store';
 import StoreProvider from './provider';
-import StoreContext from './context';
 import {
   action,
   actionName,
@@ -33,7 +32,6 @@ export {
   reducer,
   select,
   StoreProvider,
-  StoreContext,
   thunk,
   thunkStartName,
   thunkCompleteName,
