@@ -1,8 +1,6 @@
-import {
-  Component,
-  ProviderProps,
-  ConsumerProps
-} from 'react';
+/* eslint-disable */
+
+import { Component } from 'react';
 import {
   KeysOfType,
   Omit,

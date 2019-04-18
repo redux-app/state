@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { action, Action, createStore } from '@redux-app/state';
 
 interface IAnimal {
