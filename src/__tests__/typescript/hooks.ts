@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import {
   Actions,
   Thunk,

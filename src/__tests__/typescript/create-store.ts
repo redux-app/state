@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import { action, createStore, EasyPeasyConfig, Action } from '@redux-app/state';
 
 interface StoreModel {

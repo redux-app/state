@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import { createStore, Thunk, thunk } from '@redux-app/state';
 
 interface Injections {

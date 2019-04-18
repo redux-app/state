@@ -89,7 +89,7 @@ export default function createStore(model, options = {}) {
       ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
       : reduxCompose);
 
-  const bindStoreInternals = (state, isRebind = false) => {
+  const bindStoreInternals = state => {
     references.internals = createStoreInternals({
       disableInternalSelectFnMemoize,
       initialState: state,
@@ -97,7 +97,6 @@ export default function createStore(model, options = {}) {
       model: modelDefinition,
       reducerEnhancer,
       references,
-      isRebind,
     });
   };
 
@@ -138,7 +137,7 @@ export default function createStore(model, options = {}) {
   bindActionCreators(references.internals.actionCreators);
 
   const rebindStore = () => {
-    bindStoreInternals(store.getState(), true);
+    bindStoreInternals(store.getState());
     store.replaceReducer(references.internals.reducer);
     store.dispatch.replaceState(references.internals.defaultState);
     bindActionCreators(references.internals.actionCreators);

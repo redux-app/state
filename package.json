@@ -1,6 +1,6 @@
 {
   "name": "@redux-app/state",
-  "version": "2.1.5",
+  "version": "2.1.4",
   "description": "Easy global state for React",
   "license": "MIT",
   "main": "dist/@redux-app/state.cjs.js",
@@ -29,9 +29,6 @@
     "lint": "eslint src",
     "prepublish": "npm run build",
     "test": "jest"
-  },
-  "resolutions": {
-    "@types/react": "^16.8.8"
   },
   "resolutions": {
     "@types/react": "^16.8.8"
@@ -147,8 +144,7 @@
   "eslintIgnoreConfig": [
     "node_modules/",
     "coverage/",
-    "dist/",
-    "*.ts"
+    "dist/"
   ],
   "prettier": {
     "semi": true,

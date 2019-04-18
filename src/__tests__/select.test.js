@@ -17,94 +17,32 @@ test('is run for initialisation of store', () => {
   expect(selector).toHaveBeenCalledTimes(1);
 });
 
-describe('does not execute for unrelated state changes', () => {
-  test('no state changes occur', () => {
-    // arrange
-    let callCount = 0;
-    const store = createStore({
-      items: { 1: { text: 'foo' } },
-      itemList: select(state => {
-        callCount += 1;
-        return Object.keys(state.items).map(key => state.items[key]);
-      }),
-      doNothing: action(() => undefined),
-    });
-    // act
-    store.dispatch.doNothing();
-    // assert
-    const actual = store.getState().itemList;
-    expect(actual).toEqual([{ text: 'foo' }]);
-    expect(callCount).toBe(1);
-
-    // act
-    store.dispatch.doNothing();
-
-    // assert
-    expect(callCount).toBe(1);
+test('executes one only if state does not change', () => {
+  // arrange
+  let callCount = 0;
+  const store = createStore({
+    items: { 1: { text: 'foo' } },
+    itemList: select(state => {
+      callCount += 1;
+      return Object.keys(state.items).map(key => state.items[key]);
+    }),
+    doNothing: action(() => undefined),
   });
+  // act
+  store.dispatch.doNothing();
+  // assert
+  const actual = store.getState().itemList;
+  expect(actual).toEqual([{ text: 'foo' }]);
+  expect(callCount).toBe(1);
 
-  test('change occurs on different branch', () => {
-    // arrange
-    let callCount = 0;
-    const store = createStore({
-      todos: {
-        items: { 1: { text: 'foo' } },
-        itemList: select(state => {
-          callCount += 1;
-          return Object.keys(state.items).map(key => state.items[key]);
-        }),
-      },
-      other: {
-        value: 'foo',
-        updateValue: action((state, payload) => {
-          state.value = payload;
-        }),
-      },
-    });
+  // act
+  store.dispatch.doNothing();
 
-    // assert
-    const actual = store.getState().todos.itemList;
-    expect(actual).toEqual([{ text: 'foo' }]);
-    expect(callCount).toBe(1);
-
-    // act
-    store.dispatch.other.updateValue('bar');
-
-    // assert
-    expect(callCount).toBe(1);
-  });
-
-  test('change occurs in same branch', () => {
-    // arrange
-    let callCount = 0;
-    const store = createStore({
-      todos: {
-        lastUpdated: null,
-        items: { 1: { text: 'foo' } },
-        itemList: select(state => {
-          callCount += 1;
-          return Object.keys(state.items).map(key => state.items[key]);
-        }),
-        setLastUpdated: action((state, payload) => {
-          state.lastUpdated = payload;
-        }),
-      },
-    });
-
-    // assert
-    const actual = store.getState().todos.itemList;
-    expect(actual).toEqual([{ text: 'foo' }]);
-    expect(callCount).toBe(1);
-
-    // act
-    store.dispatch.todos.setLastUpdated(Date.now());
-
-    // assert
-    expect(callCount).toBe(2);
-  });
+  // assert
+  expect(callCount).toBe(1);
 });
 
-test('executes if state does change', () => {
+test('executes again if state does change', () => {
   // arrange
   const selector = jest.fn();
   selector.mockImplementation(state =>
@@ -117,10 +55,8 @@ test('executes if state does change', () => {
       state.items[2] = { text: 'bar' };
     }),
   });
-
   // act
   store.dispatch.doSomething();
-
   // assert
   const actual = store.getState().itemList;
   expect(actual).toEqual([{ text: 'foo' }, { text: 'bar' }]);
@@ -142,10 +78,8 @@ test('executes if parent action changes associated state', () => {
       state.todos.items[2] = { text: 'bar' };
     }),
   });
-
   // act
   store.dispatch.doSomething();
-
   // assert
   const actual = store.getState().todos.itemList;
   expect(actual).toEqual([{ text: 'foo' }, { text: 'bar' }]);
@@ -154,27 +88,25 @@ test('executes if parent action changes associated state', () => {
 
 test('root select', () => {
   // arrange
-  let callCount = 0;
+  const selector = jest.fn();
+  selector.mockImplementation(state =>
+    Object.keys(state.todos.items).map(key => state.todos.items[key]),
+  );
   const store = createStore({
     todos: {
       items: { 1: { text: 'foo' } },
     },
-    itemList: select(state => {
-      callCount += 1;
-      return Object.keys(state.todos.items).map(key => state.todos.items[key]);
-    }),
+    itemList: select(selector),
     doSomething: action(state => {
       state.todos.items[2] = { text: 'bar' };
     }),
   });
-
   // act
   store.dispatch.doSomething();
-
   // assert
   const actual = store.getState().itemList;
   expect(actual).toEqual([{ text: 'foo' }, { text: 'bar' }]);
-  expect(callCount).toBe(2);
+  expect(selector).toHaveBeenCalledTimes(2);
 });
 
 test('composed selectors', () => {

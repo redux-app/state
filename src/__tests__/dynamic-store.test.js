@@ -43,38 +43,7 @@ test('addModel replaces an existing model', () => {
   });
 
   // assert
-  expect(store.getState()).toEqual({
-    counter: {
-      count: 1,
-    },
-  });
-});
-
-test('addModel with initial state that does not match model', () => {
-  // arrange
-  const store = createStore(
-    {
-      counter: {
-        count: 0,
-      },
-    },
-    {
-      initialState: { foo: 'bar' },
-    },
-  );
-
-  // act
-  store.addModel('counter', {
-    count: 1,
-  });
-
-  // assert
-  expect(store.getState()).toEqual({
-    counter: {
-      count: 1,
-    },
-    foo: 'bar',
-  });
+  expect(store.getState().counter.count).toBe(1);
 });
 
 test('removeModel', () => {
@@ -102,9 +71,6 @@ test('removeModel', () => {
   expect(store.getState()).toEqual({
     counter: {
       count: 0,
-    },
-    router: {
-      path: '/',
     },
   });
 });
