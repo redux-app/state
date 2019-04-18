@@ -158,7 +158,7 @@ test('allows custom middleware with mockActions=true', () => {
   // arrange
   const customMiddleware = store => next => _action => {
     if (_action.customMiddleware) {
-      // Unfortunately 'store' is plain Redux store, not easy-peasy's one.
+      // Unfortunately 'store' is plain Redux store, not @redux-app/state's one.
       // So we have to use string named action listeners.
       next(store.dispatch({ type: 'API_REQUEST' }));
       // here is API interaction etc.

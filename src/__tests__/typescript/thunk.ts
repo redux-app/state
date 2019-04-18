@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { createStore, Thunk, thunk } from 'easy-peasy';
+import { createStore, Thunk, thunk } from '@redux-app/state';
 
 interface Injections {
   fetch: () => Promise<void>;

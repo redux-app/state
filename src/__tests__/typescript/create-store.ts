@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { action, createStore, EasyPeasyConfig, Action } from 'easy-peasy';
+import { action, createStore, EasyPeasyConfig, Action } from '@redux-app/state';
 
 interface StoreModel {
   foo: string;

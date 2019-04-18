@@ -195,7 +195,7 @@ export type Store<
  *
  * @example
  *
- * import { Thunk } from 'easy-peasy';
+ * import { Thunk } from '@redux-app/state';
  *
  * interface TodosModel {
  *   todos: Array<string>;
@@ -228,11 +228,11 @@ export type Thunk<
 /**
  * Declares an thunk action type against your model.
  *
- * https://github.com/ctrlplusb/easy-peasy#thunkaction
+ * https://github.com/redux-app/state#thunkaction
  *
  * @example
  *
- * import { thunk } from 'easy-peasy';
+ * import { thunk } from '@redux-app/state';
  *
  * const store = createStore({
  *   login: thunk(async (actions, payload) => {
@@ -268,7 +268,7 @@ export function thunk<
  *
  * @example
  *
- * import { Listeners } from 'easy-peasy';
+ * import { Listeners } from '@redux-app/state';
  *
  * interface Model {
  *   userListeners: Listeners<Model>;
@@ -289,11 +289,11 @@ export type Listen<
 /**
  * Declares action listeners against your model.
  *
- * https://github.com/ctrlplusb/easy-peasy#listenersattach
+ * https://github.com/redux-app/state#listenersattach
  *
  * @example
  *
- * import { listen } from 'easy-peasy';
+ * import { listen } from '@redux-app/state';
  *
  * const store = createStore({
  *   users: userModel,
@@ -348,7 +348,7 @@ export function listen<
  *
  * @example
  *
- * import { Action } from 'easy-peasy';
+ * import { Action } from '@redux-app/state';
  *
  * interface Model {
  *   todos: Array<Todo>;
@@ -365,11 +365,11 @@ export type Action<Model extends Object = {}, Payload = void> = {
 /**
  * Declares an action type against your model.
  *
- * https://github.com/ctrlplusb/easy-peasy#action
+ * https://github.com/redux-app/state#action
  *
  * @example
  *
- * import { action } from 'easy-peasy';
+ * import { action } from '@redux-app/state';
  *
  * const store = createStore({
  *   count: 0,
@@ -389,7 +389,7 @@ export function action<Model extends Object = {}, Payload = any>(
  *
  * @example
  *
- * import { Select } from 'easy-peasy';
+ * import { Select } from '@redux-app/state';
  *
  * interface Model {
  *   products: Array<Product>;
@@ -405,11 +405,11 @@ export type Select<Model extends Object = {}, Result = any> = {
 /**
  * Allows you to declare derived state against your model.
  *
- * https://github.com/ctrlplusb/easy-peasy#selectselector
+ * https://github.com/redux-app/state#selectselector
  *
  * @example
  *
- * import { select } from 'easy-peasy';
+ * import { select } from '@redux-app/state';
  *
  * const store = createStore({
  *   products: [],
@@ -430,7 +430,7 @@ export function select<Model extends Object = {}, Result = any>(
  *
  * @example
  *
- * import { Reducer } from 'easy-peasy';
+ * import { Reducer } from '@redux-app/state';
  *
  * interface Model {
  *   router: Reducer<ReactRouterState>;
@@ -445,11 +445,11 @@ export type Reducer<State = any, Action extends ReduxAction = AnyAction> = {
 /**
  * Allows you to declare a custom reducer to manage a bit of your state.
  *
- * https://github.com/ctrlplusb/easy-peasy#reducerfn
+ * https://github.com/redux-app/state#reducerfn
  *
  * @example
  *
- * import { reducer } from 'easy-peasy';
+ * import { reducer } from '@redux-app/state';
  *
  * const store = createStore({
  *   counter: reducer((state = 1, action) => {
@@ -465,13 +465,13 @@ export function reducer<State extends Object = {}>(
 ): Reducer<State>;
 
 /**
- * Creates an easy-peasy powered Redux store.
+ * Creates an @redux-app/state powered Redux store.
  *
- * https://github.com/ctrlplusb/easy-peasy#createstoremodel-config
+ * https://github.com/redux-app/state#createstoremodel-config
  *
  * @example
  *
- * import { createStore } from 'easy-peasy';
+ * import { createStore } from '@redux-app/state';
  *
  * interface StoreModel {
  *   todos: {
@@ -493,11 +493,11 @@ export function createStore<
 /**
  * A React Hook allowing you to use state within your component.
  *
- * https://github.com/ctrlplusb/easy-peasy#usestoremapstate-externals
+ * https://github.com/redux-app/state#usestoremapstate-externals
  *
  * @example
  *
- * import { useStore, State } from 'easy-peasy';
+ * import { useStore, State } from '@redux-app/state';
  *
  * function MyComponent() {
  *   const todos = useStore((state: State<StoreModel>) => state.todos.items);
@@ -512,11 +512,11 @@ export function useStore<StoreState extends State<any> = {}, Result = any>(
 /**
  * A React Hook allowing you to use actions within your component.
  *
- * https://github.com/ctrlplusb/easy-peasy#useactionsmapactions
+ * https://github.com/redux-app/state#useactionsmapactions
  *
  * @example
  *
- * import { useActions, Actions } from 'easy-peasy';
+ * import { useActions, Actions } from '@redux-app/state';
  *
  * function MyComponent() {
  *   const addTodo = useAction((actions: Actions<StoreModel>) => actions.todos.add);
@@ -530,11 +530,11 @@ export function useActions<StoreModel extends Object = {}, Result = any>(
 /**
  * A React Hook allowing you to use the store's dispatch within your component.
  *
- * https://github.com/ctrlplusb/easy-peasy#usedispatch
+ * https://github.com/redux-app/state#usedispatch
  *
  * @example
  *
- * import { useDispatch } from 'easy-peasy';
+ * import { useDispatch } from '@redux-app/state';
  *
  * function MyComponent() {
  *   const dispatch = useDispatch();
@@ -570,11 +570,11 @@ export function createTypedHooks<StoreModel extends Object = {}>(): {
 /**
  * Exposes the store to your app (and hooks).
  *
- * https://github.com/ctrlplusb/easy-peasy#storeprovider
+ * https://github.com/redux-app/state#storeprovider
  *
  * @example
  *
- * import { StoreProvider } from 'easy-peasy';
+ * import { StoreProvider } from '@redux-app/state';
  *
  * ReactDOM.render(
  *   <StoreProvider store={store}>

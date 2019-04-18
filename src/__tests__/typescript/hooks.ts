@@ -11,7 +11,7 @@ import {
   createTypedHooks,
   useActions,
   useStore,
-} from 'easy-peasy';
+} from '@redux-app/state';
 
 interface Model {
   stateArray: Array<string>;

@@ -21,7 +21,7 @@ import {
   useActions,
   useDispatch,
   useStore,
-} from 'easy-peasy';
+} from '@redux-app/state';
 import { connect } from 'react-redux';
 
 /**

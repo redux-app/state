@@ -8,7 +8,7 @@ import {
   thunk,
   Thunk,
   Action,
-} from 'easy-peasy';
+} from '@redux-app/state';
 
 type Injections = {
   id: 1337;
