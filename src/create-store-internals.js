@@ -35,6 +35,7 @@ export default function createStoreInternals({
   disableInternalSelectFnMemoize,
   initialState,
   injections,
+  isRebind,
   model,
   reducerEnhancer,
   references,
@@ -44,7 +45,7 @@ export default function createStoreInternals({
       ? memoizerific(maxSelectFnMemoize)(x)
       : x;
 
-  const defaultState = {};
+  const defaultState = initialState || {};
   const actionThunks = {};
   const actionCreators = {};
   const actionCreatorDict = {};
@@ -149,12 +150,15 @@ export default function createStoreInternals({
           );
         }
       } else if (isStateObject(value) && Object.keys(value).length > 0) {
-        set(path, defaultState, {});
+        const existing = get(path, defaultState);
+        if (existing == null) {
+          set(path, defaultState, {});
+        }
         recursiveExtractDefsFromModel(value, path);
       } else {
         // State
         const initialParentRef = get(parentPath, initialState);
-        if (initialParentRef && key in initialParentRef) {
+        if (!isRebind && initialParentRef && key in initialParentRef) {
           set(path, defaultState, initialParentRef[key]);
         } else {
           set(path, defaultState, value);
@@ -237,13 +241,16 @@ export default function createStoreInternals({
     if (parentPath.length > 0) {
       const target = get(parentPath, stateAfterDependencies);
       if (target) {
-        if (!selector.prevState || selector.prevState !== state) {
+        if (
+          !selector.prevState ||
+          selector.prevState !== get(parentPath, state)
+        ) {
           const newValue = selector[selectImpSymbol](target);
           newState = produce(state, draft => {
             const updateTarget = get(parentPath, draft);
             updateTarget[key] = newValue;
           });
-          selector.prevState = newState;
+          selector.prevState = get(parentPath, newState);
         }
       }
     } else if (!selector.prevState || selector.prevState !== state) {

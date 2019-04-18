@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { Actions, Thunk, Action, Select, Listen, Reducer } from '@redux-app/state';
 
 type Model = {

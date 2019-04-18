@@ -1,4 +1,6 @@
-import { createStore, action, Action } from '@redux-app/state';
+/* eslint-disable */
+
+import { createStore, action, Action } from "@redux-app/state";
 
 interface TodosModel {
   items: string[];
